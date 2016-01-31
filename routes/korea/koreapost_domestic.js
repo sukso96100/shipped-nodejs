@@ -1,5 +1,7 @@
 var jsdom = require('jsdom');
 
+// KOrea Post - Domestic Posts
+
 var startTask = function(res, postid){
   // postid should be 13 digits
   // example : 1234567890123
@@ -10,18 +12,20 @@ var startTask = function(res, postid){
     var status = [];
     window.$("table.detail_off > tbody:eq(0) > tr")
       .each(function(index, element){
+        //Create status array
         if(index>=1){
-        var item = {
-          "time" : window.$( element ).children("td:eq(0)").text() + " " + window.$( element ).children("td:eq(1)").text(),
-          "location" : window.$( element ).children("td:eq(2)").text() + " - " + window.$( element ).children("td:eq(3)").text()
-        };
-        status.push(item);
+          var item = {
+            "time" : window.$( element ).children("td:eq(0)").text() + " " + window.$( element ).children("td:eq(1)").text(),
+            "location" : window.$( element ).children("td:eq(2)").text() + " - " + window.$( element ).children("td:eq(3)").text()
+          };
+          status.push(item);
         }
       });
-    var sender = window.$("tr:eq(1) > td:eq(1)").text();
-    var receiver = window.$("tr:eq(1) > td:eq(2)").text();
-    sender.replace(/(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}/g, '');
-    receiver.replace(/(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}/g, '');
+    var sender = window.$("tr:eq(1) > td:eq(1)").text().toString();
+    var receiver = window.$("tr:eq(1) > td:eq(2)").text().toString();
+    //Remove Dates
+    sender.substring(-10);
+    receiver.substring(-10);
     var jsondata = JSON.stringify({
       "postid": postid,
       "url":url,
