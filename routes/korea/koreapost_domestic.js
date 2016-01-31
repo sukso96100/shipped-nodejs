@@ -10,11 +10,13 @@ var startTask = function(res, postid){
     var status = [];
     window.$("table.detail_off > tbody:eq(0) > tr")
       .each(function(index, element){
+        if(index>=1){
         var item = {
           "time" : window.$( element ).children("td:eq(0)").text() + " " + window.$( element ).children("td:eq(1)").text(),
           "location" : window.$( element ).children("td:eq(2)").text() + " - " + window.$( element ).children("td:eq(3)").text()
         };
         status.push(item);
+        }
       });
 
     var jsondata = JSON.stringify({
