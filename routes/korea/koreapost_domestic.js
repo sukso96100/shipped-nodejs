@@ -18,13 +18,16 @@ var startTask = function(res, postid){
         status.push(item);
         }
       });
-
+    var sender = window.$("tr:eq(1) > td:eq(1)").text();
+    var receiver = window.$("tr:eq(1) > td:eq(2)").text();
+    sender.replace(/(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}/g, '');
+    receiver.replace(/(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}/g, '');
     var jsondata = JSON.stringify({
       "postid": postid,
       "url":url,
       "carrier": "우체국 - 국내우편(Korea Post - Domestic Posts)",
-      "sender": window.$("tr:eq(1) > td:eq(1)").text(),
-      "receiver": window.$("tr:eq(1) > td:eq(2)").text(),
+      "sender": sender,
+      "receiver": receiver,
       "status":status
     });
     res.send(jsondata);
