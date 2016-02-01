@@ -2,4 +2,29 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p #{title} is a Node.js based Mail Tracking API Server.
+
+  h2 The API
+
+  h3 API Url format
+
+  code http://.../(country)/(carrier)/(postid)
+
+
+  p (country) Country of Carrier of the mail.
+  ul
+    li korea - Korea
+
+  p (carrier) Carrier of the mail.
+  ul
+    li koreapost_domestic - Korea Post Domestic Mails
+    li koreapost_international - Korea Post International Mails
+
+  p (postid) Tracking ID or Tracking Number of the mail.
+  ul
+    li Example : 1234567890123
+    li Tracking ID or Tracking Number format could be different by carrier of the mail.
+
+  h3 Example Url
+
+  code http://.../korea/koreapost_domestic/1234567890123

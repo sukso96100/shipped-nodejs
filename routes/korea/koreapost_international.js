@@ -1,12 +1,12 @@
 var jsdom = require('jsdom');
 
-// KOrea Post - Domestic Posts
+// KOrea Post - International Posts
 
 var startTask = function(res, postid){
   // postid should be 13 digits
   // example : 1234567890123
-  console.log("KOREAPOST_DOMESTIC : "+postid);
-  var url = "https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1="+postid+"&displayHeader=N";
+  console.log("KOREAPOST_INTERNATIONAL : "+postid);
+  var url = "service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE="+postid+"&displayHeader=N";
   jsdom.env( url, ["http://code.jquery.com/jquery.js"],
   function (err, window) {
     var status = [];
@@ -29,13 +29,13 @@ var startTask = function(res, postid){
     var jsondata = JSON.stringify({
       "postid": postid,
       "url":url,
-      "carrier": "우체국 - 국내우편(Korea Post - Domestic Mails)",
+      "carrier": "우체국 - 국제우편(Korea Post - International Mails)",
       "sender": sender,
       "receiver": receiver,
       "status":status
     });
     res.send(jsondata);
-    console.log("KOREAPOST_DOMESTIC - RESPONSE FOR "+ postid + " SENT");
+    console.log("KOREAPOST_INTERNATIONAL - RESPONSE FOR "+ postid + " SENT");
   });
 }
 
