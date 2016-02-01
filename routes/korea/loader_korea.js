@@ -9,4 +9,8 @@ router.get('/koreapost_domestic/:postid', function(req, res, next) { koreapost_d
 var koreapost_international = require('./koreapost_international');
 router.get('/koreapost_international/:postid', function(req, res, next) { koreapost_international(res, req.params.postid); });
 
+// Logen
+var logen = require('./logen');
+router.get('/logen/:postid', function(req, res, next) { logen(res, req.params.postid); });
+
 module.exports = router;
