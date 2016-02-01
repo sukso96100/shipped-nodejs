@@ -8,23 +8,31 @@ block content
 
   h3 API Url format
 
-  code http://.../(country)/(carrier)/(postid)
+  code http://.../(country)/(carrier)/(postid)/(lang)
 
 
   p (country) Country of Carrier of the mail.
   ul
     li korea - Korea
+    li us - United States
 
   p (carrier) Carrier of the mail.
-  ul
+  ul Korea
     li koreapost_domestic - Korea Post Domestic Mails
     li koreapost_international - Korea Post International Mails
+  ul United States
+    li ecms_express - ECMS Express (APEX)
 
   p (postid) Tracking ID or Tracking Number of the mail.
   ul
     li Example : 1234567890123
     li Tracking ID or Tracking Number format could be different by carrier of the mail.
 
+  p (langcode) Language of tracking data - Only Available on following carriers.
+  ul
+    li ECMS Express (APEX) : ko - Korean, en - English
+
   h3 Example Url
 
   code http://.../korea/koreapost_domestic/1234567890123
+  code http://.../us/ecms_express/APELAX1234567890/ko

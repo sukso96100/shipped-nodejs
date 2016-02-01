@@ -1,3 +1,6 @@
+//For Debugging
+// On Windows or fish shell. Run " DEBUG=myapp:* npm start "
+// On Linux or bash shell. Run " set DEBUG=myapp:* & npm start "
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -25,8 +28,11 @@ app.use('/', routes);
 app.use('/users', users);
 
 // Load Trackers
+var us = require('./routes/us/loader_us');
+app.use('/us', us);
 var korea = require('./routes/korea/loader_korea');
 app.use('/korea', korea);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

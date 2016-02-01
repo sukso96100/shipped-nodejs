@@ -26,6 +26,8 @@ var startTask = function(res, postid){
     //Remove Dates
     sender.substring(-10);
     receiver.substring(-10);
+
+    status.reverse();
     var jsondata = JSON.stringify({
       "postid": postid,
       "url":url,

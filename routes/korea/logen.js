@@ -9,9 +9,9 @@ var startTask = function(res, postid){
   // example : 1234567890123
   console.log("LOGEN : "+postid);
   var murl = "http://www.ilogen.com/mobile/trace_r.asp?gubun=slipno&value1="+postid;
-
+// encoding: 'euc-kr',
   jsdom.env({
-    url: murl, encoding: 'euc-kr',
+    html: murl, encoding: 'euc-kr',
     scripts: ["http://code.jquery.com/jquery.js"],
     done: function (err, window) {
 
@@ -31,7 +31,7 @@ var startTask = function(res, postid){
       var receiver = window.$("tbody:eq(0) > tr:eq(2) > td > table:eq(1) > tbody > tr:eq(2) > td:eq(1)").text().toString();
       var jsondata = JSON.stringify({
         "postid": postid,
-        "url":url,
+        "url":murl,
         "carrier": "로젠택배(Logen Corporation)",
         "sender": sender,
         "receiver": receiver,

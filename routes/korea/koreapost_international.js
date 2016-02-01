@@ -6,7 +6,7 @@ var startTask = function(res, postid){
   // postid should be 13 digits
   // example : 1234567890123
   console.log("KOREAPOST_INTERNATIONAL : "+postid);
-  var url = "service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE="+postid+"&displayHeader=N";
+  var url = "https://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?POST_CODE="+postid+"&displayHeader=N";
   jsdom.env( url, ["http://code.jquery.com/jquery.js"],
   function (err, window) {
     var status = [];
@@ -26,6 +26,8 @@ var startTask = function(res, postid){
     //Remove Dates
     sender.substring(-10);
     receiver.substring(-10);
+
+    status.reverse();
     var jsondata = JSON.stringify({
       "postid": postid,
       "url":url,
