@@ -21,8 +21,8 @@ var startTask = function(res, postid, langcode){
               //Create status array
               if(index>=1){
                 var item = {
-                  "time" : window.$( element ).children("div.location > div.t > :eq(1)").text(),
-                  "location" : window.$( element ).children("div.location > div.w > :eq(1)").text() + " - " + window.$( element ).children("div.n").text()
+                  "time" : window.$( element ).children("div.location > div.t").text(),
+                  "location" : window.$( element ).children("div.location > div.w").text() + " - " + window.$( element ).children("div.n").text()
                 };
                 status.push(item);
               }

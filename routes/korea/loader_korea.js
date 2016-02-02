@@ -13,4 +13,8 @@ router.get('/koreapost_international/:postid', function(req, res, next) { koreap
 var logen = require('./logen');
 router.get('/logen/:postid', function(req, res, next) { logen(res, req.params.postid); });
 
+// CJ Korea Express
+var cj_korea_express = require('./cj_korea_express');
+router.get('/cj_korea_express/:postid', function(req, res, next) { cj_korea_express(res, req.params.postid); });
+
 module.exports = router;

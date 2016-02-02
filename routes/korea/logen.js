@@ -5,8 +5,6 @@ var jsdom = require('jsdom');
 // Logen Corporation
 
 var startTask = function(res, postid){
-  // postid should be 13 digits
-  // example : 1234567890123
   console.log("LOGEN : "+postid);
   var murl = "http://www.ilogen.com/mobile/trace_r.asp?gubun=slipno&value1="+postid;
   jsdom.env(
