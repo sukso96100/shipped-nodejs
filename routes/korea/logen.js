@@ -9,11 +9,9 @@ var startTask = function(res, postid){
   // example : 1234567890123
   console.log("LOGEN : "+postid);
   var murl = "http://www.ilogen.com/mobile/trace_r.asp?gubun=slipno&value1="+postid;
-// encoding: 'euc-kr',
-  jsdom.env({
-    html: murl, encoding: 'euc-kr',
-    scripts: ["http://code.jquery.com/jquery.js"],
-    done: function (err, window) {
+  jsdom.env(
+     murl, ["http://code.jquery.com/jquery.js"],
+     function (err, window) {
 
       var status = [];
       window.$("tbody:eq(0) > tr:eq(2) > td > table:eq(2) > tbody > tr")
@@ -40,7 +38,7 @@ var startTask = function(res, postid){
       res.send(jsondata);
       console.log("LOGEN - RESPONSE FOR "+ postid + " SENT");
     }
-  });
+  );
 
 
 }
