@@ -4,9 +4,9 @@ var jsdom = require('jsdom');
 var request = require('request');
 
 // ECMS Express
-var startTask = function(res, postid, langcode){
+var startTask = function(res, postid, i18n){
     console.log("ECMS_EXPRESS : "+postid);
-    var url = "https://www.ecmsglobal.com/oms/showtracking?lang=" + langcode + "&trackingno="+postid;
+    var url = "https://www.ecmsglobal.com/oms/showtracking?lang=" + i18n + "&trackingno="+postid;
     request({
     "rejectUnauthorized": false,
     "url": url,
