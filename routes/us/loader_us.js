@@ -9,4 +9,8 @@ router.get('/ecms_express/:postid/:i18n', function(req, res, next) { ecms_expres
 var ups = require('./ups');
 router.get('/ups/:postid/:i18n', function(req, res, next) { ups(res, req.params.postid, req.params.i18n); });
 
+// IPARCEL
+var iparcel = require('./iparcel');
+router.get('/iparcel/:postid', function(req, res, next) { iparcel(res, req.params.postid); });
+
 module.exports = router;

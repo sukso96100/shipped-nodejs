@@ -1,5 +1,3 @@
-
-
 var jsdom = require('jsdom');
 var request = require('request');
 
