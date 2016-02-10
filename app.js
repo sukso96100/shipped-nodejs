@@ -30,8 +30,8 @@ app.use('/users', users);
 // Load Trackers
 var us = require('./routes/us/loader_us');
 app.use('/us', us);
-var korea = require('./routes/korea/loader_korea');
-app.use('/korea', korea);
+var ko = require('./routes/ko/loader_ko');
+app.use('/ko', ko);
 
 
 // catch 404 and forward to error handler
