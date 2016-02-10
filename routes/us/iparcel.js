@@ -16,12 +16,13 @@ var startTask = function(res, postid){
       .each(function(index, element){
         //Create status array
         if(index>=1){
+          var location = window.$( element ).children("td:eq(4)").text();
+           location += window.$( element ).children("td:eq(3)").text();
+           location += window.$( element ).children("td:eq(2)").text();
+           location += window.$( element ).children("td:eq(0)").text();
           var item = {
             "time" : window.$( element ).children("td:eq(1)").text(),
-            "location" : window.$( element ).children("td:eq(4)").text() \
-             + " " + window.$( element ).children("td:eq(3)").text() \
-             + " " + window.$( element ).children("td:eq(2)").text() \
-             + " " + window.$( element ).children("td:eq(0)").text()
+            "location" : location
           };
           status.push(item);
         }
