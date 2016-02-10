@@ -65,6 +65,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-require('./routes/korea/loader_korea');
-
 module.exports = app;
