@@ -27,12 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-// Load Trackers
-var us = require('./routes/us/loader_us');
-app.use('/us', us);
-var ko = require('./routes/ko/loader_ko');
-app.use('/ko', ko);
-
+// Load Mail Trackers
+var mails = require('./routes/mails/mails');
+app.use('/mails', mails);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

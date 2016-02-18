@@ -8,12 +8,11 @@ block content
 
   h3 API Url format
 
-  li http://.../(country)/(carrier)/(postid)/(i18n)
+  li http://.../(type)/(carrier)/(id)/(i18n)
 
-  p (country) Country of Carrier of the mail.
+  p (type) Country of Carrier of the mail.
   ul
-    li ko - Korea
-    li us - United States
+    li mails - Express Mails, Posts, EMS
 
   p (carrier) Carrier of the mail.
   ul Korea
@@ -26,7 +25,7 @@ block content
     li ups - UPS
     li iparcel - i-Parcel
 
-  p (postid) Tracking ID or Tracking Number of the mail.
+  p (id) Tracking ID or Tracking Number of the mail.
   ul
     li Example : 1234567890123
     li Tracking ID or Tracking Number format could be different by carrier of the mail.
@@ -38,5 +37,5 @@ block content
 
   h3 Example Url
   ul
-  li http://mailtracker.c.youngbin.xyz/ko/koreapost_domestic/1234567890123
-  li  http://mailtracker.c.youngbin.xyz/us/ecms_express/APELAX1234567890/ko
+  li http://mailtracker.c.youngbin.xyz/mails/koreapost_domestic/1234567890123
+  li  http://mailtracker.c.youngbin.xyz/mails/ecms_express/APELAX1234567890/ko
