@@ -1,14 +1,14 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
-2 info using npm@3.7.1
-3 info using node@v5.5.0
+2 info using npm@3.7.3
+3 info using node@v5.6.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle mailtracker@0.0.0~prestart: mailtracker@0.0.0
 6 silly lifecycle mailtracker@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle mailtracker@0.0.0~start: mailtracker@0.0.0
 8 verbose lifecycle mailtracker@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle mailtracker@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/youngbin/mailtracker/node_modules/.bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
-10 verbose lifecycle mailtracker@0.0.0~start: CWD: /home/youngbin/mailtracker
+9 verbose lifecycle mailtracker@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/youngbin/shipped/node_modules/.bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+10 verbose lifecycle mailtracker@0.0.0~start: CWD: /home/youngbin/shipped
 11 silly lifecycle mailtracker@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle mailtracker@0.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle mailtracker@0.0.0~start: Failed to exec start script
@@ -20,14 +20,14 @@
 14 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:24:14)
 14 verbose stack     at emitTwo (events.js:100:13)
 14 verbose stack     at ChildProcess.emit (events.js:185:7)
-14 verbose stack     at maybeClose (internal/child_process.js:821:16)
+14 verbose stack     at maybeClose (internal/child_process.js:827:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 15 verbose pkgid mailtracker@0.0.0
-16 verbose cwd /home/youngbin/mailtracker
+16 verbose cwd /home/youngbin/shipped
 17 error Linux 4.4.1-2-ARCH
 18 error argv "/usr/bin/node" "/usr/bin/npm" "start"
-19 error node v5.5.0
-20 error npm  v3.7.1
+19 error node v5.6.0
+20 error npm  v3.7.3
 21 error code ELIFECYCLE
 22 error mailtracker@0.0.0 start: `node ./bin/www`
 22 error Exit status 1

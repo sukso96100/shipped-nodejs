@@ -5,7 +5,7 @@ var jsdom = require('jsdom');
 var startTask = function(res, postid, i18n){
 
   console.log("UPS : "+postid);
-  var url = "https://wwwapps.ups.com/WebTracking/track?track=yes&loc="+i18n+"&trackNums="+postid;
+  var url = "https://wwwapps.ups.com/WebTracking/detail?tracknum="+postid+"&loc="+i18n;
   jsdom.env( url, ["http://code.jquery.com/jquery.js"],
   function (err, window) {
     var elementnav = "#fontControl > fieldset > div.appBody > fieldset > div > fieldset > ";
@@ -23,7 +23,7 @@ var startTask = function(res, postid, i18n){
         }
       });
     var receivernav = elementnav + "div.seccol6 > fieldset > div.secBody > dl > dd > strong";
-    var receiver = window.$(sendernav).text().toString();
+    var receiver = window.$(receivernav).text().toString();
     status.reverse();
     var jsondata = JSON.stringify({
       "postid": postid,
