@@ -38,4 +38,8 @@ router.get('/ups/:postid/:i18n', function(req, res, next) { ups(res, req.params.
 var iparcel = require('./us/iparcel');
 router.get('/iparcel/:postid', function(req, res, next) { iparcel(res, req.params.postid); });
 
+// USPS
+var usps = require('./us/usps');
+router.get('/usps/:postid', function(req, res, next) { usps(res, req.params.postid); });
+
 module.exports = router;
