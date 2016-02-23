@@ -16,8 +16,9 @@ var startTask = function(res, postid){
         //Create status array
         if(index!=1){
           var item = {
-            "time" : element.querySelector("td.date-time > p").innerHTML.replace(/\t+/g, ""),
-            "location" : element.querySelector("td.location > p").innerHTML.replace(/\t+/g, "") + " - " + element.querySelector("td.status > p").innerHTML.replace(/\t+/g, "")
+            "time" : element.querySelector("td.date-time > p").innerHTML.replace(/\t+/g, "").replace(/\n+/g, "").replace(/<(?:.|\n)*?>/gm, ''),
+            "location" : element.querySelector("td.location > p").innerHTML.replace(/\t+/g, "").replace(/\n+/g, "").replace(/<(?:.|\n)*?>/gm, '')
+            + " - " + element.querySelector("td.status > p").innerHTML.replace(/\t+/g, "").replace(/\n+/g, "").replace(/<(?:.|\n)*?>/gm, '')
           };
           status.push(item);
         }
