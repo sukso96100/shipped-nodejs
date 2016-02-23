@@ -28,8 +28,8 @@ app.use('/', routes);
 app.use('/users', users);
 
 // Load Mail Trackers
-var mails = require('./routes/mails/mails');
-app.use('/mails', mails);
+var mail = require('./routes/mail/mail');
+app.use('/mail', mail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
