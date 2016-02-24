@@ -40,7 +40,7 @@ var startTask = function(res, postid, i18n){
               status.push(item);
             // }
           });
-        status.reverse();
+        // status.reverse();
         var jsondata = JSON.stringify({
           "postid": postid,
           "url":url,
