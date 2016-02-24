@@ -1,41 +1,72 @@
 var jsdom = require('jsdom');
-
+var request = require('request');
 // UPS
 
 var startTask = function(res, postid, i18n){
 
   console.log("UPS : "+postid);
-  var url = "https://wwwapps.ups.com/WebTracking/detail?tracknum="+postid+"&loc="+i18n;
-  jsdom.env( url, ["http://code.jquery.com/jquery.js"],
-  function (err, window) {
-    var elementnav = "#fontControl > fieldset > div.appBody > fieldset > div > fieldset > ";
-    var statusnav = elementnav + "div.seccol18 > div:eq(1) > fieldset > div.secBody > table > tbody > tr";
-    var status = [];
-    window.$(statusnav)
-      .each(function(index, element){
-        //Create status array
-        if(index>=1){
-          var item = {
-            "time" : window.$( element ).children("td:eq(1)").text() + " " + window.$( element ).children("td:eq(2)").text(),
-            "location" : window.$( element ).children("td:eq(0)").text() + " - " + window.$( element ).children("td:eq(3)").text()
-          };
-          status.push(item);
-        }
+  var I18N = i18n;
+  if(i18n==undefined||i18n==""){
+    I18N = "en_us"
+  }
+  var url = "http://wwwapps.ups.com/WebTracking/detail?tracknum="+postid+"&loc="+I18N;
+
+
+
+
+  request({
+  "rejectUnauthorized": false,
+  "url": url,
+  "method": "GET"}, function (error, response, body) {
+    // console.log(body);
+  if (!error && response.statusCode == 200) {
+      jsdom.env( body, ["http://code.jquery.com/jquery.js"],
+      function (err, window) {
+        // console.log(window.$("table.dataTable > tbody").text());
+        var status = [];
+        window.$("table.dataTable > tbody > tr")
+          .each(function(index, element){
+            console.log(element.innerHTML);
+            console.log(index);
+            //Create status array
+            // if(index!=0){
+
+              var item = {
+                "time" : window.$( element ).children("td:eq(1)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
+                + " " + window.$( element ).children("td:eq(2)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, ""),
+                "location" : window.$( element ).children("td:eq(0)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
+                + " - " + window.$( element ).children("td:eq(3)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
+              };
+              status.push(item);
+            // }
+          });
+        status.reverse();
+        var jsondata = JSON.stringify({
+          "postid": postid,
+          "url":url,
+          "carrier": "UPS",
+          "sender": "",
+          "receiver": "",
+          "status":status
+        });
+        res.send(jsondata);
+
       });
-    var receivernav = elementnav + "div.seccol6 > fieldset > div.secBody > dl > dd > strong";
-    var receiver = window.$(receivernav).text().toString();
-    status.reverse();
-    var jsondata = JSON.stringify({
-      "postid": postid,
-      "url":url,
-      "carrier": "UPS",
-      "sender": "",
-      "receiver": receiver,
-      "status":status
-    });
-    res.send(jsondata);
-    console.log("UPS - RESPONSE FOR "+ postid + " SENT");
-  });
+  }else{
+    res.send(error);
+  }
+  })
+
+
+
+
+  // jsdom.env( url, ["http://code.jquery.com/jquery.js"],
+  // function (err, window) {
+  //
+  //   console.log("UPS - RESPONSE FOR "+ postid + " SENT");
+  // });
+
+
 }
 
 module.exports = startTask;
