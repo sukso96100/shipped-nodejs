@@ -11,9 +11,6 @@ var startTask = function(res, postid, i18n){
   }
   var url = "http://wwwapps.ups.com/WebTracking/detail?tracknum="+postid+"&loc="+I18N;
 
-
-
-
   request({
   "rejectUnauthorized": false,
   "url": url,
@@ -56,16 +53,6 @@ var startTask = function(res, postid, i18n){
     res.send(error);
   }
   })
-
-
-
-
-  // jsdom.env( url, ["http://code.jquery.com/jquery.js"],
-  // function (err, window) {
-  //
-  //   console.log("UPS - RESPONSE FOR "+ postid + " SENT");
-  // });
-
 
 }
 
