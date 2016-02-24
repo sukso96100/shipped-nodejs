@@ -42,4 +42,13 @@ router.get('/iparcel/:postid', function(req, res, next) { iparcel(res, req.param
 var usps = require('./us/usps');
 router.get('/usps/:postid', function(req, res, next) { usps(res, req.params.postid); });
 
+
+//=====
+// CHINA
+//=====
+
+// China Post
+var chinapost = require('./cn/chinapost');
+router.get('/chinapost/:postid', function(req, res, next) { chinapost(res, req.params.postid); });
+
 module.exports = router;
