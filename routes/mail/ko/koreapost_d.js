@@ -15,8 +15,10 @@ var startTask = function(res, postid){
         //Create status array
         if(index>=1){
           var item = {
-            "time" : window.$( element ).children("td:eq(0)").text() + " " + window.$( element ).children("td:eq(1)").text(),
-            "location" : window.$( element ).children("td:eq(2)").text() + " - " + window.$( element ).children("td:eq(3)").text()
+            "time" : window.$( element ).children("td:eq(0)").text()
+            + " " + window.$( element ).children("td:eq(1)").text(),
+            "location" : window.$( element ).children("td:eq(2)").text()
+            + " - " + window.$( element ).children("td:eq(3)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
           };
           status.push(item);
         }
