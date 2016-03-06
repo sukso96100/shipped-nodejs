@@ -5,7 +5,7 @@ var jsdom = require('jsdom');
 // CJ Korea Express
 
 var startTask = function(res, postid){
-  console.log("CJ_KOREA_EXPRESS : "+postid);
+  console.log("CJ_KOREA_EXPRESS_DOMESTIC : "+postid);
   var url = "https://www.doortodoor.co.kr/parcel/doortodoor.do?fsp_action=PARC_ACT_002&fsp_cmd=retrieveInvNoACT&invc_no="+postid;
   jsdom.env( url, ["http://code.jquery.com/jquery.js"],
   function (err, window) {
@@ -28,13 +28,13 @@ var startTask = function(res, postid){
     var jsondata = JSON.stringify({
       "postid": postid,
       "url":url,
-      "carrier": "CJ 대한통운(CJ Korea Express)",
+      "carrier": "CJ 대한통운 - 국내우편(CJ Korea Express - Domestic Mails)",
       "sender": sender,
       "receiver": receiver,
       "status":status
     });
     res.send(jsondata);
-    console.log("CJ_KOREA_EXPRESS - RESPONSE FOR "+ postid + " SENT");
+    console.log("CJ_KOREA_EXPRESS_DOMESTIC - RESPONSE FOR "+ postid + " SENT");
   });
 }
 

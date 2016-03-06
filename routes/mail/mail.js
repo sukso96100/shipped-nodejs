@@ -18,9 +18,13 @@ router.get('/koreapost_i/:postid', function(req, res, next) { koreapost_i(res, r
 var logen = require('./ko/logen');
 router.get('/logen/:postid', function(req, res, next) { logen(res, req.params.postid); });
 
-// CJ Korea Express
+// CJ Korea Express - Domestic
 var korex_d = require('./ko/korex_d');
 router.get('/korex_d/:postid', function(req, res, next) { korex_d(res, req.params.postid); });
+
+// CJ Korea Express - International
+var korex_i = require('./ko/korex_i');
+router.get('/korex_i/:postid', function(req, res, next) { korex_i(res, req.params.postid); });
 
 // Hyundai Logistics
 // var hyundai = require('./ko/hyundai');
