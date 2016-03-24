@@ -31,6 +31,10 @@ app.use('/users', users);
 var mail = require('./routes/mail/mail');
 app.use('/mail', mail);
 
+// Load Air Cargo Trackers
+var aircargo = require('./routes/aircargo/aircargo');
+app.use('/aircargo', aircargo);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
