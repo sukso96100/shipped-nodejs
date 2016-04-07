@@ -27,9 +27,8 @@ var startTask = function(res, postid){
   headers: {
     'Origin': 'http://global.e-hlc.com',
     'Referer': 'http://global.e-hlc.com/htdocs/HOM/BTOC/hdcm_tracing.jsp',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
- },
+    'Content-Type': 'application/x-www-form-urlencoded'}
+  },
   function (error, response, body){
     console.log("Res Received");
 
@@ -76,9 +75,6 @@ var startTask = function(res, postid){
     }else{
       res.send(error);
     }
-
   });
-
-
 }
 module.exports = startTask;
