@@ -27,8 +27,8 @@ var korex_i = require('./ko/korex_i');
 router.get('/korex_i/:postid', function(req, res, next) { korex_i(res, req.params.postid); });
 
 // Hyundai Logistics
-// var hyundai = require('./ko/hyundai');
-// router.get('/hyundai/:postid', function(req, res, next) { hyundai(res, req.params.postid); });
+var hyundai = require('./ko/hyundai');
+router.get('/hyundai/:postid', function(req, res, next) { hyundai(res, req.params.postid); });
 
 //=====
 // UNITED STATES
