@@ -1,5 +1,9 @@
 // http://www.ilogen.com/mobile/trace_r.asp?gubun=slipno&value1=21634256641
 
+var request = require('request');
+var buffer = require('buffer').Buffer;
+var iconv  = require('iconv').Iconv;
+var assert = require('assert');
 var jsdom = require('jsdom');
 
 // Logen Corporation
@@ -32,13 +36,15 @@ var startTask = function(res, postid){
               if(index>=2 && window.$( element ).children("td").length>=2){
                 var item = {
                   "time" : window.$( element ).children("td:eq(0)").text(),
-                  "location" : window.$( element ).children("td:eq(1)").text() + " - " + window.$( element ).children("td:eq(2)").text()
+                  "location" : window.$( element ).children("td:eq(1)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
+                   + " - " + window.$( element ).children("td:eq(2)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
                 };
                 status.push(item);
               }
             });
           var sender = window.$("tbody:eq(0) > tr:eq(2) > td > table:eq(1) > tbody > tr:eq(2) > td:eq(3)").text().toString();
           var receiver = window.$("tbody:eq(0) > tr:eq(2) > td > table:eq(1) > tbody > tr:eq(2) > td:eq(1)").text().toString();
+          status.reverse();
           var jsondata = JSON.stringify({
             "postid": postid,
             "url":murl,
@@ -51,6 +57,7 @@ var startTask = function(res, postid){
           console.log("LOGEN - RESPONSE FOR "+ postid + " SENT");
         });
     }else{
+      console.log(error);
       res.send(error);
     }
   });
