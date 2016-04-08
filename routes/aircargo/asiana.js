@@ -73,8 +73,8 @@ var startTask = function(res, postid, i18n){
                 status.unshift(status1[i-1]);
               }
 
-            var sender = window.$("div#new_track_step > div.point_off > h1").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "");
-            var receiver = window.$("div#new_track_step > div.point_on2 > h1").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "");
+            var sender = window.$("div#new_track_step > div.point_off > h1").text().replace(":", "");
+            var receiver = window.$("div#new_track_step > div.point_on2 > h1").text().replace(":", "");
 
             var jsondata = JSON.stringify({
               "postid": postid,
