@@ -35,8 +35,10 @@ var startTask = function(res, postid, i18n){
         console.log(body);
         jsdom.env( body, ["http://code.jquery.com/jquery.js"],
         function (err, window) {
-          var status = [];
           console.log(window.$("html").html());
+
+          //Info 1
+          var status = [];
           window.$("div#rst_view2_0 > div.scrollbox > div > table > tbody > tr")
             .each(function(index, element){
               //Create status array
@@ -52,9 +54,25 @@ var startTask = function(res, postid, i18n){
                 };
                 status.push(item);
             });
-            var sender = window.$("div#new_track_step > div.point_off > h1").text().toString();
-            var receiver = window.$("div#new_track_step > div.point_on2 > h1").text().toString();
             status.reverse();
+
+            //Info 2
+            var status1 = [];
+            window.$("div#rst_view3_0 > div.scrollbox > div > table > tbody > tr")
+              .each(function(index, element){
+                //Create status array
+                  var item = {
+                    "time" : window.$( element ).children("td:eq(2)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, ""),
+                    "location" : window.$( element ).children("td:eq(0)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
+                      + " - " + window.$( element ).children("td:eq(1)").text()
+                  };
+                  status1.push(item);
+              });
+              status.unshift(status1);
+
+            var sender = window.$("div#new_track_step > div.point_off > h1").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "");
+            var receiver = window.$("div#new_track_step > div.point_on2 > h1").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "");
+
             var jsondata = JSON.stringify({
               "postid": postid,
               "url":userurl,
