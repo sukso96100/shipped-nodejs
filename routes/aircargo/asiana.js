@@ -1,48 +1,74 @@
 
+var request = require('request');
+var buffer = require('buffer').Buffer;
+var iconv  = require('iconv').Iconv;
+var assert = require('assert');
 var jsdom = require('jsdom');
-var phantom = require('phantom');
 // var phantom=require('node-phantom');
 // Asiana Cargo
 //https://www.asianacargo.com/tracking/newAirWaybill.do?globalLang=Ko&Billno=05392682
 //localhost, 127.0.0.0/8, ::1
 var startTask = function(res, postid, i18n){
   console.log("Asiana Cargo : "+postid);
-  var url = "https://www.asianacargo.com/tracking/newAirWaybill.do?globalLang="+i18n+"&Billno="+postid;
+  var url = "https://www.asianacargo.com/tracking/newAirWaybill.do?globalLang="+i18n;
+  var userurl = url+"&Billno="+postid;
   console.log(url);
-  phantom.create().then(function(ph) {
-    ph.createPage().then(function(page) {
+  console.log(userurl);
+  request({
+  url: url,
+  method: 'POST',
+  body: 'prefix=988&Prefix=988&mawb='+postid+'&Billno='+postid,
+  headers: {
+    'Origin': 'https://www.asianacargo.com',
+    'Referer': 'https://www.asianacargo.com/cargoContent.do?globalLang='+i18n,
+    'Content-Type': 'application/x-www-form-urlencoded'}
+  },
+  function (error, response, body){
+    console.log("Res Received");
 
-        // Open Asiana Cargo Main Page
-      page.open(url).then(function(status) {
-        console.log(status);
-        page.property('content').then(function(status) {
-          console.log("onLoadFinished");
-          console.log("=======================================================")
-          console.log(status);
-          console.log("=======================================================")
+    if (!error && response.statusCode == 200) {
 
-          page.includeJs("//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js",
-            function() {
-              console.log("evaluating scripts... : Clicking form submit button");
-              page.evaluate(function() {
-                // document.getElementsByClassName("btn_big")[1];
-                goaction3(document.frm01);
-                // $(".btn_big:eq(1)").click();
-              });
-              console.log("sleep 5 sec");
-              setTimeout(
-                 function () {
-                   console.log("5 sec passed");
-                  //  page.render( 'google.png' );
-                   phantom.exit(0);
-                   console.log("5 sec passed");
-                 },
-                 5000 // wait 5,000ms (5s)
-               );
+      // var data = new buffer(body, 'binary');
+      // var converter = new iconv('euc-kr', 'UTF8');
+      // data = converter.convert(data).toString();
+      // console.log(data);
+        console.log(body);
+        jsdom.env( body, ["http://code.jquery.com/jquery.js"],
+        function (err, window) {
+          var status = [];
+          console.log(window.$("html").html());
+          window.$("div#rst_view2_0 > div.scrollbox > div > table > tbody > tr")
+            .each(function(index, element){
+              //Create status array
+              if(index==0){
+                var time = window.$( element ).children("td:eq(2)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "");
+              }else {
+                var time = window.$( element ).children("td:eq(4)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "");
+              }
+                var item = {
+                  "time" : time,
+                  "location" : window.$( element ).children("td:eq(0)").text().replace(/(<(?:.|\n)*?>)|\t+|\n+/g, "")
+                    + " - " + window.$( element ).children("td:eq(1)").text()
+                };
+                status.push(item);
             });
+            var sender = window.$("div#new_track_step > div.point_off > h1").text().toString();
+            var receiver = window.$("div#new_track_step > div.point_on2 > h1").text().toString();
+            status.reverse();
+            var jsondata = JSON.stringify({
+              "postid": postid,
+              "url":userurl,
+              "carrier": "아시아나 항공 항공화물(Asiana Cargo)",
+              "sender": sender,
+              "receiver": receiver,
+              "status":status
+            });
+            res.send(jsondata);
+            console.log("ASIANA - RESPONSE FOR "+ postid + " SENT");
         });
-      });
-    });
+    }else{
+      res.send(error);
+    }
   });
 }
 
