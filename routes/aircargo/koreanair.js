@@ -12,12 +12,12 @@ var iconv  = require('iconv').Iconv;
 var assert = require('assert');
 var startTask = function(res, postid, i18n){
   console.log("Korean Air Cargo : "+postid);
-  var url = "http://cargo.koreanair.com/ecus/trc/servlet/TrackingServlet";
+  var url = "http://cargo.koreanair.com/ecus/trc/servlet/TrackingServlet?menu1=m1&menu2=m01-1&version="+i18n;
   console.log(url);
   request({
   url: url,
   method: 'POST',
-  body: 'awb_no='+prefix+postid+'&multiAwbNo='+prefix+postid+'&no_awb1='+prefix+'&no_awb2='+postid+'&version='+i18n,
+  body: 'awb_no='+prefix+postid+'&multiAwbNo='+prefix+postid+'&preAwbNo='+prefix+'&postAwbNo='+postid+'&version='+i18n+'&pid=5',
   headers: {
     'Origin': 'http://cargo.koreanair.com/',
     'Referer': 'http://cargo.koreanair.com/ecus/trc/servlet/TrackingServlet',
