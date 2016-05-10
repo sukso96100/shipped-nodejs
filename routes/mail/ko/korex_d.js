@@ -9,6 +9,9 @@ var startTask = function(res, postid){
   var url = "https://www.doortodoor.co.kr/parcel/doortodoor.do?fsp_action=PARC_ACT_002&fsp_cmd=retrieveInvNoACT&invc_no="+postid;
   jsdom.env( url, ["http://code.jquery.com/jquery.js"],
   function (err, window) {
+    if(err!=undefined){
+      console.log(err);
+    }
     var status = [];
     window.$("#tabContents > ul > li.first > div.intap > div.cont:eq(1) > div.board_area > table > tbody >  tr")
       .each(function(index, element){
