@@ -6,8 +6,7 @@ var jsdom = require('jsdom');
 
 var startTask = function(res, postid){
   console.log("CJ_KOREA_EXPRESS_DOMESTIC : "+postid);
-  var url = "http://nplus.doortodoor.co.kr/web/detail.jsp?slipno="+postid;
-  var userurl = "https://www.doortodoor.co.kr/parcel/doortodoor.do?fsp_action=PARC_ACT_002&fsp_cmd=retrieveInvNoACT&invc_no="+postid;
+  var url = "http://beta.singpost.com/track-items"+postid;
   jsdom.env( url, ["http://code.jquery.com/jquery.js"],
   function (err, window) {
     if(err!=undefined){
